@@ -5,7 +5,6 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/hnts/arch-scheduling-controller/controller"
 	"k8s.io/client-go/informers"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -39,7 +38,7 @@ func main() {
 	}
 
 	factory := informers.NewSharedInformerFactory(clientset, time.Second*30)
-	controller := controller.NewArchSchedulingController(factory, clientset)
+	controller := NewArchSchedulingController(factory, clientset)
 	stop := make(chan struct{})
 	defer close(stop)
 
